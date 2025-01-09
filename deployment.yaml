@@ -20,7 +20,7 @@ spec:
         app: argo-deployment
     spec:
       containers:
-      - image: nginx
+      - image: hashicorp/http-echo
         imagePullPolicy: Always
-        name: nginx
+        name: http-echo
         resources: {}
