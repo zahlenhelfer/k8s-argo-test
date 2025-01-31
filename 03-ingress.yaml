@@ -3,7 +3,6 @@ kind: Ingress
 metadata:
   name: minimal-ingress
 spec:
-  ingressClassName: nginx
   rules:
     - host: 'test.zahlenhelfer.duckdns.org'
       http:
