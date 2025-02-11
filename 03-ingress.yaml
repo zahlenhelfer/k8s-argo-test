@@ -4,13 +4,13 @@ metadata:
   name: minimal-ingress
 spec:
   rules:
-    - host: 'test.zahlenhelfer.duckdns.org'
+    - host: "test.zahlenhelfer.duckdns.org"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: argo-test-service
+                name: web-test-service
                 port:
                   number: 80
