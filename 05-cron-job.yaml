@@ -1,0 +1,21 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: evicted-pod-cleanup
+spec:
+  schedule: '0 */2 * * *'
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: kubectl
+              image: bitnami/kubectl:latest
+              command:
+                - '/bin/bash'
+                - '-c'
+                - >
+                  kubectl get pods --all-namespaces --field-selector=status.phase=Failed
+                  -o json | jq -r '.items[] | select(.status.reason=="Evicted") | .metadata.name'
+                  | xargs -r kubectl delete pod
+          restartPolicy: OnFailure
